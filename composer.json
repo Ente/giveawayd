@@ -1,0 +1,7 @@
+{
+    "require": {
+        "pecee/simple-router": "4.3.7.2",
+        "discord/interactions": "^2.2",
+        "discord-php/slash": "*"
+    }
+}

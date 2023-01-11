@@ -1,0 +1,21 @@
+# PHP kann getarnt werden, mit den Endungen .html
+AddType application/x-httpd-php .html 
+ErrorDocument 404 /404.html
+
+#RewriteRule ^/?api/(.*)$ /api/v1/$1 [R,L]
+
+Options -Indexes
+
+RewriteEngine on
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-l
+RewriteRule ^(.*)$ index1.php/$1
+
+
+<IfModule mod_rewrite.c>
+  RewriteEngine on
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}\.php -f
+  RewriteRule ^(.*)$ $1.php
+</IfModule>
