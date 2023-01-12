@@ -1,8 +1,7 @@
 <?php
 #ini_set("display_errors", 1);
 session_start();
-echo "test2";
-die();
+
 ob_start();
 require_once "../inc/db.inc.php";
 require_once "../inc/discord.inc.php";
@@ -11,7 +10,6 @@ ob_end_clean();
 ### check if request if from discord bot
 echo 2;
 if(strpos($_SERVER["REQUEST_URI"], "discord=true") || getallheaders()["X-GWD"] == true){
-    echo "1";
     die();
     $g_data = [
         "g_id" => $id,
