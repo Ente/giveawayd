@@ -24,8 +24,8 @@ if(strpos($_SERVER["REQUEST_URI"], "discord=true") || getallheaders()["X-GWD"] =
     ];
 
     $sql = "INSERT INTO `giveaway`(`g_id`, `g_name`, `g_description`, `g_participants`, `g_prize`, `g_winner`, `g_timeleft`, `g_host`, `g_webhook`, `g_webhook_url`, `g_channel_id`, `g_public`, `g_status`) VALUES ('{$g_data["g_id"]}','{$g_data["g_name"]}','{$g_data["g_description"]}','{$g_data["g_participants"]}','{$g_data["g_prize"]}',NULL,'{$g_data["g_timeleft"]}','{$user->username}#{$user->discriminator}','{$g_data["g_webhook"]}','{$g_data["g_webhook_url"]}',NULL,'{$g_data["g_public"]}','{$g_data["g_status"]}');";
-    mysqli_real_query($conn, $sql);
-    if(mysqli_error($conn)){
+    $res = mysqli_real_query($conn, $sql);
+    if(mysqli_error($conn) || $res == false){
         echo json_encode(array("error" => "error with the sql!"));
         die();
     } else {
