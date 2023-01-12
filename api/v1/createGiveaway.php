@@ -8,7 +8,6 @@ require_once "../inc/discord.inc.php";
 ob_end_clean();
 
 ### check if request if from discord bot
-echo 2;
 if(strpos($_SERVER["REQUEST_URI"], "discord=true") || getallheaders()["X-GWD"] == true){
     die();
     $g_data = [
@@ -28,11 +27,14 @@ if(strpos($_SERVER["REQUEST_URI"], "discord=true") || getallheaders()["X-GWD"] =
     mysqli_real_query($conn, $sql);
     if(mysqli_error($conn)){
         echo json_encode(array("error" => "error with the sql!"));
+        die();
     } else {
         header("Location: ../../panel?info=created&id={$id}");
+        die();
     }
 } else {
     echo json_encode(array("error" => "could not create giveaway!"));
+    die();
 }
 
 if(checkID() == true){
