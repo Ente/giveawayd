@@ -10,7 +10,7 @@ ob_end_clean();
 
 ### check if request if from discord bot
 echo 2;
-if(strpos($_SERVER["REQUEST_URI"], "discord=true")){
+if(strpos($_SERVER["REQUEST_URI"], "discord=true") || getallheaders()["X-GWD"] == true){
     echo "1";
     die();
     $g_data = [
