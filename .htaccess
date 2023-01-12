@@ -1,4 +1,5 @@
 # PHP kann getarnt werden, mit den Endungen .html
+RewriteEngine on
 AddType application/x-httpd-php .html 
 ErrorDocument 404 /404.html
 

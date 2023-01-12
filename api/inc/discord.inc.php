@@ -9,7 +9,7 @@ session_start();
 ///////////////////////////////////////////////////////////////////////
 define('OAUTH2_CLIENT_ID', "869192246786932786");                                                                        #
 define('OAUTH2_CLIENT_SECRET', "rvLgjhJaTXIbzDT-vnZVuxhE1bQn93Pq");                 # Replace with values from the Discord Developer Page
-define('OAUTH_REDIRECT_URI', "http://localhost:3000/api/discord_login.php?discord=true");                     #
+define('OAUTH_REDIRECT_URI', "http://giveawayd.theducky.xyz/api/discord_login.php?discord=true");                     #
 ///////////////////////////////////////////////////////////////////////
 
 

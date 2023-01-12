@@ -1,9 +1,41 @@
 <?php
 #ini_set("display_errors", 1);
 session_start();
-
+echo "test2";
+die();
+ob_start();
 require_once "../inc/db.inc.php";
 require_once "../inc/discord.inc.php";
+ob_end_clean();
+
+### check if request if from discord bot
+echo 2;
+if(strpos($_SERVER["REQUEST_URI"], "discord=true")){
+    echo "1";
+    die();
+    $g_data = [
+        "g_id" => $id,
+        "g_name" => mysqli_real_escape_string($conn,$g_name),
+        "g_description" => mysqli_real_escape_string($conn,$g_description),
+        "g_public" => mysqli_real_escape_string($conn,$g_public),
+        "g_prize" => mysqli_real_escape_string($conn,$g_prize),
+        "g_timeleft" => $g_timeleft,
+        "g_webhook" => mysqli_real_escape_string($conn,$g_public),
+        "g_webhook_url" => mysqli_real_escape_string($conn,$g_webhook_url),
+        "g_status" => "Ongoing",
+        "g_time_normal" => $g_time_normal
+    ];
+
+    $sql = "INSERT INTO `giveaway`(`g_id`, `g_name`, `g_description`, `g_participants`, `g_prize`, `g_winner`, `g_timeleft`, `g_host`, `g_webhook`, `g_webhook_url`, `g_channel_id`, `g_public`, `g_status`) VALUES ('{$g_data["g_id"]}','{$g_data["g_name"]}','{$g_data["g_description"]}','{$g_data["g_participants"]}','{$g_data["g_prize"]}',NULL,'{$g_data["g_timeleft"]}','{$user->username}#{$user->discriminator}','{$g_data["g_webhook"]}','{$g_data["g_webhook_url"]}',NULL,'{$g_data["g_public"]}','{$g_data["g_status"]}');";
+    mysqli_real_query($conn, $sql);
+    if(mysqli_error($conn)){
+        echo json_encode(array("error" => "error with the sql!"));
+    } else {
+        header("Location: ../../panel?info=created&id={$id}");
+    }
+} else {
+    echo json_encode(array("error" => "could not create giveaway!"));
+}
 
 if(checkID() == true){
     $user = apiRequest($apiURLBase);
